@@ -7,13 +7,32 @@ output:
 
 
 ## Loading and preprocessing the data
-
-
+Let's unzip the ZIP file into current directory and load the data.
+```{r unzip.n.load, echo=TRUE}
+unzip('activity.zip')
+activity <- read.csv('activity.csv',
+                     colClasses=c('integer', 'Date', 'integer'))
+```
 
 ## What is mean total number of steps taken per day?
+We start the analysis by plotting an histogram of the number of steps by days. We will probably have a warning because of NAs.
+```{r steps.by.day, echo=TRUE, message=FALSE}
+library(dplyr)
+library(ggplot2)
 
+steps.by.day <- group_by(activity, date) %>%
+  summarize(steps=sum(steps))
 
+qplot(steps, data=steps.by.day, binwidth=1000) +
+  xlab('Number of steps') +
+  ylab('Number of days')
+```
 
+Let's glance at the mean and median values of the number of steps by day. They are surprisingly close.
+```{r mean.and.median, echo=TRUE}
+mean(steps.by.day$steps, na.rm=TRUE)
+median(steps.by.day$steps, na.rm=TRUE)
+```
 ## What is the average daily activity pattern?
 
 
