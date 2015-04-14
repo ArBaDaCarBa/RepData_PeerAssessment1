@@ -57,7 +57,27 @@ filter(steps.by.interval, steps==max(steps)) %>% select(-time)
 And it is the interval from 8:35 to 8:40 indeed, with an average of a bit more than 200 steps.
 
 ## Imputing missing values
+How many missing values in the dataset ?
+```{r missing.nb, echo=TRUE}
+sum(is.na(activity$steps))
+nrow(activity)
+sum(is.na(activity$steps)) / nrow(activity)
+```
 
+There are 2304 missing values, out of 17,568. That is about 13%.
 
+Let's remplace NAs with mean for the corresponding 5 minutes interval.
+```{r activity.imputed, echo=TRUE}
+activity.imputed <- group_by(activity, interval) %>%
+  mutate(steps=ifelse(is.na(steps), mean(steps, na.rm=TRUE), steps)) %>%
+  ungroup
+
+steps.by.day.imputed <- group_by(activity.imputed, date) %>%
+  summarize(steps=sum(steps))
+
+qplot(steps, data=steps.by.day.imputed, binwidth=1000) +
+  xlab('Number of steps') +
+  ylab('Number of days')
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
