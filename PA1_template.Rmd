@@ -33,8 +33,14 @@ Let's glance at the mean and median values of the number of steps by day. They a
 mean(steps.by.day$steps, na.rm=TRUE)
 median(steps.by.day$steps, na.rm=TRUE)
 ```
-## What is the average daily activity pattern?
 
+## What is the average daily activity pattern?
+```{r steps.by.interval, echo=TRUE}
+steps.by.interval <- group_by(activity, interval) %>%
+  summarize(steps=mean(steps, na.rm=TRUE))
+
+qplot(interval, steps, data=steps.by.interval, geom='line')
+```
 
 
 ## Imputing missing values
