@@ -47,6 +47,14 @@ qplot(time, steps, data=steps.by.interval, geom='line') +
   scale_x_datetime(labels=date_format("%H:%M"), breaks="2 hours")
 ```
 
+Well this looks OK. There are a few occasional steps between 11PM and 5AM, but otherwise it looks like a good nap time.
+
+Now let's find the most active interval that looks like it's around 8:30.
+```{r max_steps.by.interval}
+filter(steps.by.interval, steps==max(steps)) %>% select(-time)
+```
+
+And it is the interval from 8:35 to 8:40 indeed, with an average of a bit more than 200 steps.
 
 ## Imputing missing values
 
