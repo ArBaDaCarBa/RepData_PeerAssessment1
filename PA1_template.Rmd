@@ -26,7 +26,8 @@ steps.by.day <- group_by(activity, date) %>%
 
 qplot(steps, data=steps.by.day, binwidth=1000) +
   xlab('Number of steps') +
-  ylab('Number of days')
+  ylab('Number of days') +
+  geom_rug()
 ```
 
 Let's glance at the mean and median values of the number of steps by day. They are surprisingly close.
@@ -77,7 +78,8 @@ steps.by.day.imputed <- group_by(activity.imputed, date) %>%
 
 qplot(steps, data=steps.by.day.imputed, binwidth=1000) +
   xlab('Number of steps') +
-  ylab('Number of days')
+  ylab('Number of days') +
+  geom_rug()
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
