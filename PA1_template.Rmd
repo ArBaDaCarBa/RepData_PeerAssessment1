@@ -90,7 +90,7 @@ qplot(steps, data=steps.by.day.imputed, binwidth=1000) +
 The histogram doesn't show a huge change. The peak is higher, but that's about it.
 What about mean and median?
 
-```{r echo=TRUE}
+```{r mean.and.median.imputed, echo=TRUE}
 mean(steps.by.day.imputed$steps)
 median(steps.by.day.imputed$steps)
 ```
@@ -98,7 +98,7 @@ median(steps.by.day.imputed$steps)
 So, with our imputation algorithm, basically there is no change whether you replace the NAs or not.
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r}
+```{r steps.by.interval.imputed, echo=TRUE}
 # It's probably better to use the POSIXlt $wday than the weekdays method
 # to avoid locale issues
 activity.imputed$weekday <- ifelse(
@@ -122,7 +122,7 @@ qplot(time, steps, data=steps.by.interval.imputed, geom="line") +
 Seems I'm not the only to wake up later on weekends ;)
 The weekends look at first less active (peaks are lower), but the time range between 12:00 and 18:00 shows a different pattern. Let's try to count the number of steps.
 
-```{r echo=TRUE}
+```{r sum.of.steps.by.weekday.weekend, echo=TRUE}
 group_by(steps.by.interval.imputed, weekday) %>% summarize(steps=sum(steps))
 12201.52 / 10255.85
 ```
