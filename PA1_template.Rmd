@@ -82,6 +82,16 @@ qplot(steps, data=steps.by.day.imputed, binwidth=1000) +
   geom_rug()
 ```
 
+The histogram doesn't show a huge change. The peak is higher, but that's about it.
+What about mean and median?
+
+```{r echo=TRUE}
+mean(steps.by.day.imputed$steps)
+median(steps.by.day.imputed$steps)
+```
+
+So, with our imputation algorithm, basically there is no change whether you replace the NAs or not.
+
 ## Are there differences in activity patterns between weekdays and weekends?
 ```{r}
 # It's probably better to use the POSIXlt $wday than the weekdays method
