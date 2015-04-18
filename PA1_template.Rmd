@@ -121,7 +121,7 @@ qplot(time, steps, data=steps.by.interval.imputed, geom='line') +
   ggtitle('Mean number of steps taken each day')
 ```
 
-Seems I' not the only to wake up later on weekends ;)
+Seems I'm not the only to wake up later on weekends ;)
 The weekends look at first less active (peaks are lower), but the time range between 12:00 and 18:00 shows a different pattern. Let's try to count the number of steps.
 
 ```{r echo=TRUE}
