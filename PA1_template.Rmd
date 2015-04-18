@@ -96,6 +96,7 @@ steps.by.interval.imputed <- group_by(activity.imputed, interval, weekday) %>%
   mutate(time=ISOdate(2015, 4, 20, floor(interval / 100), interval %% 100))
 # Added a random date (actually the assignement due date) with the time
 # corresponding to the interval. Will make a nicer plot ;)
+# Maybe not the nicest hack, but it's working OK.
 
 qplot(time, steps, data=steps.by.interval.imputed, geom='line') +
   scale_x_datetime(labels=date_format("%H:%M"), breaks="2 hours") +
