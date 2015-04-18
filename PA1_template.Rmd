@@ -112,3 +112,13 @@ qplot(time, steps, data=steps.by.interval.imputed, geom='line') +
   scale_x_datetime(labels=date_format("%H:%M"), breaks="2 hours") +
   facet_grid(weekday ~ .)
 ```
+
+Seems I' not the only to wake up later on weekends ;)
+The weekends look at first less active (peaks are lower), but the time range between 12:00 and 18:00 shows a different pattern. Let's try to count the number of steps.
+
+```{r echo=TRUE}
+group_by(steps.by.interval.imputed, weekday) %>% summarize(steps=sum(steps))
+12201.52 / 10255.85
+```
+
+That almost 20% more steps on weekends... Doing some sports?
